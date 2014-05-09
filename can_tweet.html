@@ -45,19 +45,21 @@
         var relY = 0;
 
         $('article').mousedown(function(){
+
             $('article').mousemove(function(e){
                 getSelectionText();
-                relX = e.pageX;// - parentOffset.left;
-                relY = e.pageY;// - parentOffset.top;
+                
+        //         relX = e.pageX;// - parentOffset.left;
+        //         relY = e.pageY;// - parentOffset.top;
             });
         });
-                $('article').mouseup(function(e){
-                  var parentOffset = $(this).parent().offset(); 
-                  //or $(this).offset(); if you really just want the current element's offset
-                  
-                  console.log("relX is " + relX + ". relY is " + relY);
-                  $('#can_tweet').css("top", relY).css("left", relX);
-                });
+
+
+        $('article').mouseup(function(e){
+          getSelectionText();
+          
+          $('#can_tweet').css("top", e.pageY + 10).css("left", e.pageX + 10);
+        });
                 
            
        
