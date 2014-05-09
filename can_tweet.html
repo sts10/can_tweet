@@ -1,0 +1,80 @@
+<html>
+<head>
+  <title></title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <style type="text/css">
+    article {
+      /*position: relative;*/
+      width: 500px;
+      margin-top: 100px;
+      margin-left:200px;
+    }
+
+    #can_tweet {
+      position: absolute;
+      color: white;
+      background-color: blue;
+      z-index: 100;
+      /*left: 45%;*/
+    }
+  </style>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        function getSelectionText() {
+            var text = "";
+            if (window.getSelection) {
+                text = window.getSelection().toString();
+                if (text.length > 1 && text.length <= 90) {
+                    $('#can_tweet').show().html("Yep, you've selected " + text.length + " characters.");
+                }
+                else if (text.length > 90) {
+                    var tooMany = text.length - 90;
+                    $('#can_tweet').show().html("Nope! You've selected " + tooMany + " too many characters.");    
+                }
+                else {
+                    $('#can_tweet').hide().html("Not yet") //.css("display", "none");
+                }   
+            }
+            return text;
+        }
+
+        var isDragging = false;
+
+        var relX = 0;
+        var relY = 0;
+
+        $('article').mousedown(function(){
+            $('article').mousemove(function(e){
+                getSelectionText();
+                relX = e.pageX;// - parentOffset.left;
+                relY = e.pageY;// - parentOffset.top;
+            });
+        });
+                $('article').mouseup(function(e){
+                  var parentOffset = $(this).parent().offset(); 
+                  //or $(this).offset(); if you really just want the current element's offset
+                  
+                  console.log("relX is " + relX + ". relY is " + relY);
+                  $('#can_tweet').css("top", relY).css("left", relX);
+                });
+                
+           
+       
+
+    });
+  </script>
+</head>
+<body>
+  <article>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque error fuga nihil quos aut repellat maxime ea consequuntur veritatis aspernatur illo deserunt tempore quasi necessitatibus consequatur mollitia quidem voluptates aperiam.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque error fuga nihil quos aut repellat maxime ea consequuntur veritatis aspernatur illo deserunt tempore quasi necessitatibus consequatur mollitia quidem voluptates aperiam.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque error fuga nihil quos aut repellat maxime ea consequuntur veritatis aspernatur illo deserunt tempore quasi necessitatibus consequatur mollitia quidem voluptates aperiam.
+
+    </p>
+  
+    <p id="can_tweet">Not yet</p>
+  </article>
+</body>
+</html>
