@@ -19,11 +19,24 @@
       background-color: white;
       z-index: 100;
     }
-    
+
+    #tweet_button {
+      position: absolute;
+      border: 2px black solid;
+      padding: 2px;
+      border-radius: 1px;
+      background-color: white;
+      z-index: 100;
+    }
+
   </style>
   <script type="text/javascript">
     $(document).ready(function () {
-        function getSelectionText() {
+        function getSelectionText(){
+          return window.getSelection().toString();
+        }
+
+        function getSelectionTextAndShowNumOfChars() {
             var text = "";
             if (window.getSelection) {
                 text = window.getSelection().toString();
@@ -32,7 +45,7 @@
                 }
                 else if (text.length > 90) {
                     var tooMany = text.length - 90;
-                    $('#num_of_chars').show().html("<span style='color:red'>" + text.length + " </span>");
+                    $('#num_of_chars').show().html("<span style='color:red'>-" + tooMany + " </span>");
                 }
                 else {
                     $('#num_of_chars').hide().html("Not yet") //.css("display", "none");
@@ -49,19 +62,26 @@
         $('article').mousedown(function(){
 
             $('article').mousemove(function(e){
-                getSelectionText();
+                getSelectionTextAndShowNumOfChars();
                 $('#num_of_chars').css("top", e.pageY + 10).css("left", e.pageX + 10);
-                
-        //         relX = e.pageX;// - parentOffset.left;
-        //         relY = e.pageY;// - parentOffset.top;
+    
             });
         });
 
 
-        // $('article').mouseup(function(e){
-        //   getSelectionText();     
-        // });
-                
+        $('article').mouseup(function(e){
+          $('#num_of_chars').hide();
+          if (window.getSelection().toString().length >= 1) {
+            text = getSelectionText();   
+            $('#tweet_button').css("top", e.pageY + 10).css("left", e.pageX + 10); 
+            // alert(text);
+          }
+        });
+             
+
+
+             //         relX = e.pageX;// - parentOffset.left;
+             //         relY = e.pageY;// - parentOffset.top;   
            
        
 
@@ -78,6 +98,8 @@
     </p>
   
     <p id="num_of_chars">Not yet</p>
+
+    <div id="tweet_button">Tweet</div>
   </article>
 </body>
 </html>
