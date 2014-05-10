@@ -11,13 +11,15 @@
       margin-left:200px;
     }
 
-    #can_tweet {
+    #num_of_chars {
       position: absolute;
-      color: white;
-      background-color: blue;
+      border: 2px black solid;
+      padding: 2px;
+      border-radius: 1px;
+      background-color: white;
       z-index: 100;
-      /*left: 45%;*/
     }
+    
   </style>
   <script type="text/javascript">
     $(document).ready(function () {
@@ -26,14 +28,14 @@
             if (window.getSelection) {
                 text = window.getSelection().toString();
                 if (text.length > 1 && text.length <= 90) {
-                    $('#can_tweet').show().html("Yep, you've selected " + text.length + " characters.");
+                    $('#num_of_chars').show().html("<span style='color:green'>" + text.length + " </span>");
                 }
                 else if (text.length > 90) {
                     var tooMany = text.length - 90;
-                    $('#can_tweet').show().html("Nope! You've selected " + tooMany + " too many characters.");    
+                    $('#num_of_chars').show().html("<span style='color:red'>" + text.length + " </span>");
                 }
                 else {
-                    $('#can_tweet').hide().html("Not yet") //.css("display", "none");
+                    $('#num_of_chars').hide().html("Not yet") //.css("display", "none");
                 }   
             }
             return text;
@@ -48,6 +50,7 @@
 
             $('article').mousemove(function(e){
                 getSelectionText();
+                $('#num_of_chars').css("top", e.pageY + 10).css("left", e.pageX + 10);
                 
         //         relX = e.pageX;// - parentOffset.left;
         //         relY = e.pageY;// - parentOffset.top;
@@ -55,11 +58,9 @@
         });
 
 
-        $('article').mouseup(function(e){
-          getSelectionText();
-          
-          $('#can_tweet').css("top", e.pageY + 10).css("left", e.pageX + 10);
-        });
+        // $('article').mouseup(function(e){
+        //   getSelectionText();     
+        // });
                 
            
        
@@ -76,7 +77,7 @@
 
     </p>
   
-    <p id="can_tweet">Not yet</p>
+    <p id="num_of_chars">Not yet</p>
   </article>
 </body>
 </html>
