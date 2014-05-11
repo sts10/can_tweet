@@ -1,3 +1,5 @@
+// http://codepen.io/anon/pen/nfcjG
+
 function getSelectedText () {
   if (window.getSelection) {
       var range = window.getSelection ();
