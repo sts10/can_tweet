@@ -54,37 +54,33 @@
             return text;
         }
 
-        var isDragging = false;
+        // var isDragging = false;
 
-        var relX = 0;
-        var relY = 0;
+        // var relX = 0;
+        // var relY = 0;
 
-        $('article').mousedown(function(){
-          if (window.getSelection().toString().length >= 1) {
-            $('#num_of_chars').show();
-          }
-          $('article').mousemove(function(e){
-            getSelectionTextAndShowNumOfChars();
-            $('#num_of_chars').css("top", e.pageY + 10).css("left", e.pageX + 10);
-          });
-        });
+        // $('article').mousedown(function(){
+        //   if (window.getSelection().toString().length >= 1) {
+        //     $('#num_of_chars').show();
+        //   }
+        //   $('article').mousemove(function(e){
+        //     getSelectionTextAndShowNumOfChars();
+        //     $('#num_of_chars').css("top", e.pageY + 10).css("left", e.pageX + 10);
+        //   });
+        // });
 
 
-        $('article').mouseup(function(e){
+        $('article').on("mouseup", function(e){
           $('#num_of_chars').hide();
           if (window.getSelection().toString().length >= 1) {
             text = getSelectionText();   
-            $('#tweet_button').css("top", e.pageY - 40).css("left", e.pageX + 10); 
+            $('#tweet_button').show().css("top", e.pageY - 40).css("left", e.pageX + 10); 
+            $('#tweet_button').html("<a href='http://twitter.com/home?status=" + text + "' target='_blank'>Tweet</a>");
             // alert(text);
+          } else {
+           $('#tweet_button').hide();
           }
         });
-             
-
-
-             //         relX = e.pageX;// - parentOffset.left;
-             //         relY = e.pageY;// - parentOffset.top;   
-           
-       
 
     });
   </script>
@@ -99,8 +95,10 @@
     </p>
   
     <p id="num_of_chars">Not yet</p>
-
-    <div id="tweet_button">Tweet</div>
   </article>
+    <div id="tweet_button">
+      <!-- <a href="http://www.twitter.com" target="_blank">Tweet</a> -->
+    </div>
+  
 </body>
 </html>
