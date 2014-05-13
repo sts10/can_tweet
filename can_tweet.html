@@ -23,10 +23,17 @@
     #tweet_button {
       position: absolute;
       border: 2px black solid;
-      padding: 2px;
-      border-radius: 1px;
+      background-image:url('http://cornishrebels.co.uk/wp-content/uploads/2013/11/Twitter-bird-logo-PNG.png');
+      background-size: 25px auto;
+      background-repeat:no-repeat;
+      background-position: center center;
+
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
       background-color: white;
       z-index: 100;
+      cursor: pointer;
     }
 
   </style>
@@ -75,8 +82,11 @@
           if (window.getSelection().toString().length >= 1) {
             text = getSelectionText();   
             $('#tweet_button').show().css("top", e.pageY - 40).css("left", e.pageX + 10); 
-            $('#tweet_button').html("<a href='http://twitter.com/home?status=" + text + "' target='_blank'>Tweet</a>");
-            // alert(text);
+            $('#tweet_button').click(function(){
+              window.open("http://twitter.com/home?status=" + text + " " + document.URL, "Tweet", "width=400,height=250");
+            });
+            // $('#tweet_button').html("<a href='http://twitter.com/home?status=" + text + "' target='_blank'></a>");
+            // <img src='http://cornishrebels.co.uk/wp-content/uploads/2013/11/Twitter-bird-logo-PNG.png' width='20px' />
           } else {
            $('#tweet_button').hide();
           }
