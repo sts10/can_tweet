@@ -85,12 +85,18 @@
             $('#tweet_button').click(function(){
               window.open("http://twitter.com/home?status=" + text + " " + document.URL, "Tweet", "width=400,height=250");
             });
+            if (text.length > 90) {
+              $('#tweet_button').css('opacity', '0.6');
+            } else {
+              $('#tweet_button').css('opacity', '1');
+            }
             // $('#tweet_button').html("<a href='http://twitter.com/home?status=" + text + "' target='_blank'></a>");
             // <img src='http://cornishrebels.co.uk/wp-content/uploads/2013/11/Twitter-bird-logo-PNG.png' width='20px' />
           } else {
            $('#tweet_button').hide();
           }
         });
+
 
     });
   </script>
