@@ -81,7 +81,7 @@
           $('#num_of_chars').hide();
           if (window.getSelection().toString().length >= 1) {
             text = getSelectionText();   
-            $('#tweet_button').show().css("top", e.pageY - 50).css("left", e.pageX + 10); 
+            $('#tweet_button').show().css("top", e.pageY - 50).css("left", 425); // e.pageX + 10
             $('#tweet_button').click(function(){
               window.open("http://twitter.com/home?status=" + text + " " + document.URL, "Tweet", "width=400,height=250");
             });
@@ -97,13 +97,19 @@
           }
         });
 
+        $(document).on("mousedown", function(e){
+          if ($(e.target).attr("class") != "article_paragraph") {
+            $('#tweet_button').hide();
+          }
+        });
+
 
     });
   </script>
 </head>
 <body>
   <article>
-    <p>
+    <p class="article_paragraph">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque error fuga nihil quos aut repellat maxime ea consequuntur veritatis aspernatur illo deserunt tempore quasi necessitatibus consequatur mollitia quidem voluptates aperiam.
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque error fuga nihil quos aut repellat maxime ea consequuntur veritatis aspernatur illo deserunt tempore quasi necessitatibus consequatur mollitia quidem voluptates aperiam.
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque error fuga nihil quos aut repellat maxime ea consequuntur veritatis aspernatur illo deserunt tempore quasi necessitatibus consequatur mollitia quidem voluptates aperiam.
