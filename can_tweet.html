@@ -98,7 +98,7 @@
         });
 
         $(document).on("mousedown", function(e){
-          if ($(e.target).attr("class") != "article_paragraph") {
+          if ($(e.target).attr("class") != "article_paragraph" && $(e.target).attr("id") != "tweet_button") {
             $('#tweet_button').hide();
           }
         });
